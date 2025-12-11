@@ -1,30 +1,112 @@
-# Cloud Architect Lab 01 – Python API + Azure Infra + Linux Setup
+# Cloud Foundation Project – Python API + Linux Automation
 
-This project is a hands-on cloud architecture lab that combines:
+![Architecture](A_README_document_showcases_a_cloud_foundation_pro.png)
 
-- A small Python REST API (Flask)
-- Infrastructure-as-Code for Azure (Bicep)
-- A Linux setup script to configure a VM
+## Introductie
 
-The goal is to demonstrate skills that are relevant for a future Cloud Engineer / Cloud Architect role:
-designing, automating and documenting a small cloud-native workload.
+Dit was mijn eerste cloud foundation project.  
+Ik focuste bewust op Linux, Git en automation in plaats van features.  
+De API is simpel — maar het doel was deployability, troubleshooting en cloud-basisvaardigheden laten zien.
 
 ---
 
-## Scenario
+## Doel van het project
 
-You are a Cloud Engineer and you need to design a simple workload for a customer:
+Dit project laat zien dat ik:
 
-- A small Python API that can suggest an Azure VM size
-- The API must run on a Linux VM in Azure
-- The infrastructure must be described as code (Bicep)
-- A Linux shell script should prepare the VM (install Python, dependencies, run the app)
+- met Linux kan werken  
+- een Python API (Flask) kan bouwen  
+- een Linux bootstrap script kan schrijven dat automatisch dependencies installeert  
+- een project gestructureerd kan opzetten  
+- GitHub kan gebruiken zoals een Cloud Engineer  
 
-This repo contains:
+---
 
-- `app/app.py` – Python Flask API
-- `infra/main.bicep` – Azure infrastructure definition
-- `scripts/linux_setup.sh` – Linux configuration script
+## Architectuur Diagram
 
-> Note: In a restricted training subscription, deployment may be blocked by policy.  
-> This project is still valuable as an architectural and automation example.
+```txt
+ +------------------+         +------------------------+        +-----------------------------+
+ |    Developer     | ----->  |     GitHub Repo        | -----> |   Linux Environment (WSL)   |
+ |  (local machine) |         |  cloud-foundation-lab   |        |   or Azure Linux VM         |
+ +------------------+         +------------------------+        +-----------------------------+
+                                          |                                   |
+                                          |                                   |
+                                          |                         +-------------------------+
+                                          |                         |   bootstrap.sh script    |
+                                          |                         | - Installeert Python     |
+                                          |                         | - Creëert virtual env    |
+                                          |                         | - Installeert packages   |
+                                          |                         | - Start Flask API        |
+                                          |                         +-------------------------+
+                                          |
+                                          ↓
+                                +---------------------+
+                                |   Flask API (app)   |
+                                | - /health           |
+                                | - /vm-size          |
+                                +---------------------+
+API Endpoints
+Health check
+GET /health
+
+
+Response:
+
+{ "status": "ok" }
+
+VM Size Recommendation
+POST /api/v1/recommend-vm
+
+
+Body:
+
+{
+  "cpu_cores": 2,
+  "memory_gb": 4,
+  "workload_type": "web"
+}
+
+Installatie (lokaal)
+python -m venv .venv
+.venv\Scripts\activate   # Windows
+
+pip install -r api/requirements.txt
+python api/app.py
+
+Wat ik geleerd heb
+
+Werken met Flask
+
+Opzetten van Linux virtual environments
+
+Schrijven van een eigen bootstrap script
+
+Debuggen met PowerShell, Ubuntu/WSL en VS Code
+
+Git commit / push workflow
+
+Volgende stappen / Roadmap
+
+Azure Bicep template toevoegen
+
+Deployment naar een echte Azure VM
+
+Pipeline via GitHub Actions
+
+Docker-versie van de app
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
