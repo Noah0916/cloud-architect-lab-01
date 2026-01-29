@@ -1,3 +1,18 @@
+# Cloud Architect Lab 01 – Secure Python API on Azure
+
+## Overview
+This project demonstrates the design and deployment of a secure cloud architecture on Microsoft Azure, including:
+
+- A Python-based REST API
+- A Linux Virtual Machine
+- Azure Virtual Network and Subnets
+- Network Security Groups (NSG)
+- Managed Identity and RBAC
+- Secure access to Azure resources
+
+The goal of this lab is to practice real-world Cloud Engineer / Cloud Architect skills:
+infrastructure design, security, identity, and documentation.
+
 # Cloud Foundation Project – Python API + Linux Automation
 
 ![Architecture](A_README_document_showcases_a_cloud_foundation_pro.png)
